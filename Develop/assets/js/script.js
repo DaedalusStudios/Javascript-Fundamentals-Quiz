@@ -38,6 +38,8 @@ function tickTimer() {
         timer--;
         timerspan.textContent = timer;
         if(timer<=0) {
+            timer = 0;
+            timerspan.textContent = timer;
             timerspan.setAttribute("data-state","paused");
             GameOver();
         }
@@ -47,7 +49,6 @@ function tickTimer() {
 
 //Start over
 function ResetTimer() {
-    console.log("Timer Reset");
     timer = 100;
     timerspan.textContent = timer;
     timerspan.setAttribute("data-state", "paused");
@@ -63,6 +64,7 @@ function GetQuestion() {
     var questionAsArray = qna.splice(randomQuestion,1);
     DisplayQuestion(questionAsArray); //I wanted to do a return here and assign the content to the div but I failed to use this correctly
 }
+
 
 function DisplayQuestion(questionAsArray) {
     //Since I've spliced the array, I have to double-tap it.  Maybe try to fix this later?
@@ -80,7 +82,7 @@ function DisplayQuestion(questionAsArray) {
                 CorrectAnswer();
             }
             else {
-                WrongAnswer();
+                WrongAnswer(e);
             }
         })
         answersUl.appendChild(answer);
@@ -112,10 +114,15 @@ function CorrectAnswer() {
 }
 
 //remove time from Timer
-function WrongAnswer() {
+function WrongAnswer(e) {
     if(timerspan.getAttribute("data-state")!="paused") {
         timer = timer - wrongAnswerPenalty;
+        if(timer<=0) {
+            timer = 0;
+        }
         timerspan.textContent = timer;
+        e.target.style.textDecoration  = "line-through";
+        e.target.removeEventListener("click");
     }
 }
 
