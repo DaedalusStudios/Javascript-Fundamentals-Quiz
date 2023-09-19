@@ -2,7 +2,10 @@ var timerspan = document.querySelector("#timerspan");
 var contentDiv = document.querySelector("#content");
 var timer = 100;
 var wrongAnswerPenalty = 5;
-
+var gameoverDiv = document.querySelector("#gameover");
+var scoringDiv = document.querySelector("#scoring");
+var submitBtn = document.querySelector("#submitscore");
+var score=0;   //I'm going to use this to track the score
 
 //I started the interval already.  Why?  So we don't have to clear the interval for any reason.
 //Since I'm pausing and resetting the timer, just having this tick shouldn't do any harm.
@@ -10,27 +13,43 @@ setInterval(() => {
     tickTimer();
 }, 1000);
 
-//I'm going to make a pausable timer so I can animate the screen without using the available time
-function ToggleTimer() {
-    //grab the timer element
-    console.log("Timer toggled");
-    if(timerspan.getAttribute("data-state")=="started") {
-        timerspan.setAttribute("data-state", "paused");
-    } else if(timerspan.getAttribute("data-state")=="paused") { 
-        timerspan.setAttribute("data-state", "started");
-    }
-}
 
 //Dev Button Start the timer
-var a = document.querySelector("#start").addEventListener("click", function(e) {
+var startgame = document.querySelector("#start").addEventListener("click", function(e) {
     console.log("Timer Started");
     e.preventDefault;
     ClearContent();
-    ResetTimer(); //resets in the event that this is the end-game button
     GetQuestion();
     timerspan.setAttribute("data-state","started");
 });
 
+var submitScore = document.querySelector("#submitscore").addEventListener("click", function(e) { 
+    e.preventDefault;
+    //get the initials textbox value
+    var initials = document.querySelector("#initials").value;
+    //need to pull any high scores from local storage as an array!!!
+    var highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+
+    //Take our current score and push it into the array
+    highScores.push({ 
+        initials: initials, 
+        score: score 
+    });
+
+    // Sort highest to the top (This was really hard)
+    highScores.sort(function(a, b) {
+        return b.score - a.score;
+    });
+
+    // Grab top 3
+    var topScores = highScores.slice(0, 10);
+
+    // Store the new array
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+
+    console.log("Score submitted");  //dev, will delete
+    ShowScores(topScores);
+});
 
 //This does the tick, if the state is not paused the clock is ticking
 function tickTimer() {
@@ -42,20 +61,13 @@ function tickTimer() {
             timerspan.textContent = timer;
             timerspan.setAttribute("data-state","paused");
             GameOver();
+            clearInterval();
         }
     }
 
 }
 
-//Start over
-function ResetTimer() {
-    timer = 100;
-    timerspan.textContent = timer;
-    timerspan.setAttribute("data-state", "paused");
-}
 
-//End the game
-function GameOver() {}
 
 //get a new question
 function GetQuestion() {
@@ -65,7 +77,7 @@ function GetQuestion() {
     DisplayQuestion(questionAsArray); //I wanted to do a return here and assign the content to the div but I failed to use this correctly
 }
 
-
+//puts the question on the page
 function DisplayQuestion(questionAsArray) {
     //Since I've spliced the array, I have to double-tap it.  Maybe try to fix this later?
     var question = document.createElement("h3");
@@ -93,22 +105,20 @@ function DisplayQuestion(questionAsArray) {
 
 }
 
-//clearContent
+//clears the Content div
 function ClearContent() {
     console.log("Content div cleared");
     contentDiv.innerHTML="";
 }
 
-//show high scores
-function ShowScores() {}
 
-//add score to localstore
-function AddScore() {}
+
 
 //CorrectAnswer!
 function CorrectAnswer() {
     if(timerspan.getAttribute("data-state")!="paused") {
         ClearContent();
+        AddScore();
         GetQuestion();
     }
 }
@@ -122,11 +132,36 @@ function WrongAnswer(e) {
         }
         timerspan.textContent = timer;
         e.target.style.textDecoration  = "line-through";
-        e.target.removeEventListener("click");
     }
 }
+//add score to localstore
+function AddScore() {
+    score++;
+}
 
+//End the game
+function GameOver() {
+    gameoverDiv.setAttribute("style","display:block");
+    contentDiv.setAttribute("style","display:none");
+    scoringDiv.setAttribute("style","display:none");
+    document.querySelector("#score").textContent = score;
+    console.log("Game Over");  
+}
 
+//show high scores
+function ShowScores(topScores) {
+    //updates the page, then changes the view
+    console.log(topScores);
+    for(i=0; i<topScores.length; i++) {
+        var listitem = document.createElement("li");
+        listitem.innerHTML = topScores[i].initials + " - " + topScores[i].score;
+        document.querySelector("#scoreslist").appendChild(listitem);
+    }
+    gameoverDiv.setAttribute("style","display:none");
+    contentDiv.setAttribute("style","display:none");
+    scoringDiv.setAttribute("style","display:block");
+    
+}
 
 
 ///Data for questions.  I've decided to use a nested array of 50 questions. Source: https://www.interviewbit.com/javascript-mcq/
