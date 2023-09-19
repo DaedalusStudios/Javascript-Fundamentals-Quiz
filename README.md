@@ -1,3 +1,8 @@
+# Developers note
+All code is in the Develop folder
+Questions are sourced from InterviewBit
+
+
 # Javascript-Fundamentals-Quiz
 
 ## User Story
