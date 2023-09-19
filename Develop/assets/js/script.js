@@ -80,7 +80,7 @@ function GetQuestion() {
 //puts the question on the page
 function DisplayQuestion(questionAsArray) {
     //Since I've spliced the array, I have to double-tap it.  Maybe try to fix this later?
-    var question = document.createElement("h3");
+    var question = document.createElement("p");
     question.innerHTML=questionAsArray["0"]["0"];
     var answersUl = document.createElement("ul");
     for(i=1; i<5; i++){

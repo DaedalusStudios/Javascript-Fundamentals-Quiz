@@ -1,85 +1,74 @@
 * {
     box-sizing: border-box;
 }
+
 body {
     font-family: Arial;
     margin: 0;
 }
+
 header {
     text-align: center;
 }
 
-#content {
-    border-radius:10px;
+#content, #gameover, #scoring {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    justify-content: center;
+    border-radius: 10px;
     background-color: antiquewhite;
     border: 2px solid #000;
     box-shadow: 10px 5px 5px rgb(22, 22, 22);
-    padding:10px;
-    margin-left:auto;
-    margin-right:auto;
-    width:75%;
-    flex: 0 0 400px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
 }
+
 .timer {
-    margin-left:auto;
-    margin-right:auto;
-    width:50%;
-    text-align:center;
-    font-weight:600;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+    font-weight: 600;
 }
+
 pre {
-    background-color:darkgray;
+    background-color: darkgray;
     border: 2px solid #000;
     border-radius: 5px;
     box-shadow: 10px 5px 5px rgb(22, 22, 22);
-    padding:15px;
+    padding: 15px;
 }
+
 #content li {
-    list-style:none;
-    padding:10px;
-    display:flexbox;
-    font-size:1rem;
+    list-style: none;
+    padding: 10px;
+    display: flex; 
+    font-size: .6rem;
     border-radius: 5px;
 }
+
 #content li:hover {
     background-color: lightgray;
 }
-#gameover {
+
+#gameover, #scoring {
     text-align: center;
-    margin-left:auto;
-    margin-right:auto;
-    display:none;
-    border-radius:10px;
-    background-color: antiquewhite;
-    border: 2px solid #000;
-    box-shadow: 10px 5px 5px rgb(22, 22, 22);
-    padding:10px;
-    width:75%;
+    display: none;
 }
-#scoring {
-    text-align: center;
-    margin-left:auto;
-    margin-right:auto;
-    display:none;
-    border-radius:10px;
-    background-color: antiquewhite;
-    border: 2px solid #000;
-    box-shadow: 10px 5px 5px rgb(22, 22, 22);
-    padding:10px;
-    width:75%;
-}
+
 #scoreslist {
     text-align: center;
     width: 50%;
-    margin-left:auto;
-    margin-right:auto;
+    margin: 0 auto; 
 }
 
 button {
-    margin-left:auto;
-    margin-right:auto;
-    width:25%;
+    margin: 0 auto; /* Center horizontally */
+    width: 25%;
     background-color: green;
     border-radius: 5px;
-    align-items: center;
+    display: inline-block; 
 }
