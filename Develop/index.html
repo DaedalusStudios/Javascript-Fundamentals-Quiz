@@ -11,20 +11,22 @@
     <header>
       <h2>Timed Javascript Quiz!</h2>
     </header>
+    <main>
     <section>
-    <div class="timer">Timer:<span id="timerspan" data-state="paused">100</span></div>
-    <div id="content">
-      <p>Just hit the start button to get the quiz on.  Each incorrect answer removes five seconds from your time!</p>
-      <button id="start">Start Quiz!</button>
-      <p>Questions are sourced from <a href="Source: https://www.interviewbit.com/javascript-mcq/">InterviewBit</a></p>
+      <div class="timer">Timer:<span id="timerspan" data-state="paused">100</span></div>
+      <div id="content">
+        <p>Just hit the start button to get the quiz on.  Each incorrect answer removes five seconds from your time!</p>
+        <button id="start">Start Quiz!</button>
+        <p>Questions are sourced from <a href="Source: https://www.interviewbit.com/javascript-mcq/">InterviewBit</a></p>
+      </div>
+    </section>
+    
+    <div id="gameover">
+      <h1>GAME OVER</h1>
+      <h2>Final Score: <div id="score"></div></h2>
+      <label>Submit your initials: <input type="text" maxlength="3" id="initials"></label>
+      <button id="submitscore">Submit Score</button>
     </div>
-  </section>
-  <div id="gameover">
-    <h1>GAME OVER</h1>
-    <h2>Final Score: <div id="score"></div></h2>
-    <label>Submit your initials: <input type="text" maxlength="3" id="initials"></label>
-    <button id="submitscore">Submit Score</button>
-  </div>
   <section>
 
   </section>
@@ -35,7 +37,8 @@
         <p>Refresh to play again!</p>
     </div>
   </section>
-    
+  </main>
   </body>
 </html>
-    <script src="./assets/js/script.js"></script>
+
+<script src="./assets/js/script.js"></script>
