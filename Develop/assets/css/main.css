@@ -9,9 +9,14 @@ header {
     text-align: center;
 }
 #content {
+    border-radius:10px;
+    background-color: antiquewhite;
+    border: 2px solid #000;
+    box-shadow: 10px 5px 5px rgb(22, 22, 22);
+    padding:10px;
     margin-left:auto;
     margin-right:auto;
-    width:50%;
+    width:75%;
 }
 .timer {
     margin-left:auto;
@@ -24,16 +29,55 @@ pre {
     background-color:darkgray;
     border: 2px solid #000;
     border-radius: 5px;
-    box-shadow: 10px 5px 5px lightgray;
-    width:50%;
+    box-shadow: 10px 5px 5px rgb(22, 22, 22);
+    padding:15px;
 }
 #content li {
     list-style:none;
-    padding:20px;
+    padding:10px;
     display:flexbox;
-    font-size:1.25rem;
+    font-size:1rem;
     border-radius: 5px;
 }
 #content li:hover {
     background-color: lightgray;
+}
+#gameover {
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    display:none;
+    border-radius:10px;
+    background-color: antiquewhite;
+    border: 2px solid #000;
+    box-shadow: 10px 5px 5px rgb(22, 22, 22);
+    padding:10px;
+    width:75%;
+}
+#scoring {
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    display:none;
+    border-radius:10px;
+    background-color: antiquewhite;
+    border: 2px solid #000;
+    box-shadow: 10px 5px 5px rgb(22, 22, 22);
+    padding:10px;
+    width:75%;
+}
+#scoreslist {
+    text-align: center;
+    width: 50%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#start {
+    margin-left:auto;
+    margin-right:auto;
+    width:25%;
+    background-color: green;
+    border-radius: 5px;
+    align-items: center;
 }
