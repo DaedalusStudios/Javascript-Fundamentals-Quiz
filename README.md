@@ -1,5 +1,5 @@
 # Developers note
-All code is in the Develop folder
+All code is in the Develop folder, launch the index.html\
 Questions are sourced from InterviewBit
 
 
